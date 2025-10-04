@@ -59,10 +59,9 @@ pipeline {
                         fi
                     """
 
-                    // Stop existing container
+                    // Stop and remove existing container if it exists
                     sh """
-                        docker stop ${IMAGE_NAME} || true
-                        docker rm ${IMAGE_NAME} || true
+                        docker rm -f ${IMAGE_NAME} || true
                     """
 
                     // Run API container
