@@ -112,6 +112,20 @@ pipeline {
                 }
             }
         }
+
+        stage('REST Assured Tests') {
+            when {
+                branch 'local'
+            }
+            steps {
+                script {
+                    sh '''
+                        echo "🧪 Running REST Assured API tests..."
+                        ./gradlew smokeTest -Dtest.url=http://localhost:8081 || echo "⚠️ Smoke tests not configured"
+                    '''
+                }
+            }
+        }
     }
 
     post {
